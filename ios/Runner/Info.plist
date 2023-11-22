@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+<string>Denna app behöver åtkomst till din kamera</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Denna app behöver åtkomst till ditt fotoalbum</string>
+
 </dict>
 </plist>
