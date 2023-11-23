@@ -37,13 +37,17 @@ class DatabaseHelper {
   }
 
   // Skapar tabellen när databasen skapas för första gången.
+  // Unik identifierare för varje uppgift.
+  // Texten för uppgiften.
+  // Boolean för att markera om uppgiften är slutförd.
+  // Sökväg till en bild, om den finns.
   Future _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE $table (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,  // Unik identifierare för varje uppgift.
-        task TEXT NOT NULL,                    // Texten för uppgiften.
-        completed BOOLEAN NOT NULL,            // Boolean för att markera om uppgiften är slutförd.
-        imagePath TEXT                         // Sökväg till en bild, om den finns.
+        id INTEGER PRIMARY KEY AUTOINCREMENT,  
+        task TEXT NOT NULL,                    
+        completed BOOLEAN NOT NULL,           
+        imagePath TEXT                         
       )
     ''');
   }
