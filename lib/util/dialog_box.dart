@@ -9,7 +9,7 @@ class DialogBox extends StatelessWidget {
   final VoidCallback onCancel; // En funktion som körs när användaren klickar på "Avbryt" knappen
 
   // Konstruktor för DialogBox-widget
-  DialogBox({
+  const DialogBox({
     super.key,
     required this.controller, // Kräver en kontroller
     required this.onSave, // Kräver en funktion för att spara uppgiften
@@ -19,8 +19,8 @@ class DialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1), // Bakgrundsfärg för dialogrutan
-      content: Container(
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1), // Bakgrundsfärg för dialogrutan
+      content: SizedBox(
         height: 120,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -28,7 +28,7 @@ class DialogBox extends StatelessWidget {
             // Användarinput via en textinmatningsruta
             TextField(
               controller: controller, // Använd den angivna kontrollern för textinmatningen
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Write a new task", // Platsförhållandestips i textinmatningsrutan
               ),

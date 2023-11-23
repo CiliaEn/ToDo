@@ -5,7 +5,7 @@ import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
   tz.initializeTimeZones(); // Initialisera tidszoner
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TodoPage(),
+      home: const TodoPage(),
       theme: ThemeData(
-        primarySwatch: createMaterialColor(Color.fromRGBO(253, 7, 7, 1)),
+        primarySwatch: createMaterialColor(const Color.fromRGBO(253, 7, 7, 1)),
       ),
     );
   }

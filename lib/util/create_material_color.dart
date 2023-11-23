@@ -12,7 +12,7 @@ MaterialColor createMaterialColor(Color color) {
   for (int i = 1; i < 10; i++) {
     strengths.add(0.1 * i);
   }
-  strengths.forEach((strength) {
+  for (var strength in strengths) {
     final double ds = 0.5 - strength;
     // Skapa nyansen av färgen och lägg till den i karta
     swatch[(strength * 1000).round()] = Color.fromRGBO(
@@ -21,7 +21,7 @@ MaterialColor createMaterialColor(Color color) {
       b + ((b - 255).abs() * ds).round(),
       1,
     );
-  });
+  }
   // Returnera den genererade MaterialColor
   return MaterialColor(color.value, swatch);
 }

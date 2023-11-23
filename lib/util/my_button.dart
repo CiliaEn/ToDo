@@ -34,7 +34,7 @@ class MyButton extends StatelessWidget {
       ),
       child: Text(
         text, // Text som visas på knappen
-        style: textStyle ?? TextStyle(color: Colors.white), // Textstil för knappens text (standard: vit text)
+        style: textStyle ?? const TextStyle(color: Colors.white), // Textstil för knappens text (standard: vit text)
       ),
     );
   }

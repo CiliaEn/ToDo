@@ -19,7 +19,7 @@ class TodoApp extends StatefulWidget {
   final void Function(BuildContext)? deleteFunction;
    final void Function()? pickImage; // Lägg till pickImage som ett fält
 
-  TodoApp({
+  const TodoApp({
   Key? key,
   required this.taskId,
   required this.taskName,
@@ -50,8 +50,8 @@ class _TodoAppState extends State<TodoApp> {
 
  // I TodoApp-klassens State
  Future<void> pickImage() async {
-  final ImagePicker _picker = ImagePicker();
-  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  final ImagePicker picker = ImagePicker();
+  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
   if (image != null) {
     final Directory appDir = await getApplicationDocumentsDirectory();
@@ -101,7 +101,7 @@ Future<void> _loadImagePath() async {
       padding: const EdgeInsets.only(left: 25.0, right: 25, top: 25),
       child: Slidable(
         endActionPane: ActionPane(
-          motion: StretchMotion(),
+          motion: const StretchMotion(),
           children: [
             SlidableAction(
               onPressed: widget.deleteFunction,
@@ -117,12 +117,12 @@ Future<void> _loadImagePath() async {
             ..rotateX(0.01)
             ..rotateY(0.02),
           child: Container(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Color.fromARGB(255, 228, 52, 8),
+                color: const Color.fromARGB(255, 228, 52, 8),
                 width: 2.0,
               ),
               boxShadow: [
@@ -130,7 +130,7 @@ Future<void> _loadImagePath() async {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(3, 3),
+                  offset: const Offset(3, 3),
                 ),
               ],
             ),
@@ -140,7 +140,7 @@ Future<void> _loadImagePath() async {
                   children: [
                     Theme(
                       data: ThemeData(
-                        unselectedWidgetColor: Color.fromRGBO(253, 7, 7, 1),
+                        unselectedWidgetColor: const Color.fromRGBO(253, 7, 7, 1),
                       ),
                       child: Checkbox(
                         value: isCompleted,
@@ -152,7 +152,7 @@ Future<void> _loadImagePath() async {
                             }
                           }
                         },
-                        activeColor: Color.fromRGBO(253, 7, 7, 1),
+                        activeColor: const Color.fromRGBO(253, 7, 7, 1),
                         checkColor: Colors.white,
                       ),
                     ),
@@ -167,19 +167,19 @@ Future<void> _loadImagePath() async {
                                   ? TextDecoration.lineThrough
                                   : null,
                               color: isCompleted
-                                  ? Color.fromRGBO(253, 7, 7, 1)
+                                  ? const Color.fromRGBO(253, 7, 7, 1)
                                   : Colors.black,
                             ),
                           ),
                           Text(
-                            '${DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated)}',
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                            DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated),
+                            style: const TextStyle(fontSize: 12, color: Colors.grey),
                           ),
                         ],
                       ),
                     ),
                 IconButton(
-  icon: Icon(Icons.camera_alt),
+  icon: const Icon(Icons.camera_alt),
   onPressed: () {
     pickImage(); // Anropa pickImage när användaren vill ladda upp en bild
   },

@@ -68,8 +68,8 @@ class _TodoPageState extends State<TodoPage> {
   }
 
  Future<void> pickImage(int taskId) async {
-  final ImagePicker _picker = ImagePicker();
-  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  final ImagePicker picker = ImagePicker();
+  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
   if (image != null) {
     final Directory appDir = await getApplicationDocumentsDirectory();
