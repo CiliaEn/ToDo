@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,3 +22,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// Lägg till MyHomePage klassen här om den behövs

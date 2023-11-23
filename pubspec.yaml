@@ -34,12 +34,12 @@ dependencies:
   intl: ^0.17.0 # Use the latest version
   timezone: ^0.8.0 # Use the latest version
   path: ^1.8.0
-  shared_preferences: ^2.0.15
   image_picker: ^0.8.5+3 # For image picking
   path_provider: ^2.0.9 # For file path handling
   flutter_slidable: ^1.2.0
   sqflite: ^2.0.0+3
   cupertino_icons: ^1.0.2
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
