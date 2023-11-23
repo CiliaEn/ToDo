@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'add_todo.dart'; // Import the AddTodoPage file
+import 'pages/todo_page.dart';
+import 'util/create_material_color.dart'; // Importera util.dart-filen
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
+  tz.initializeTimeZones(); // Initialisera tidszoner
   runApp(const MyApp());
 }
 
@@ -11,55 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ToDo',
+      debugShowCheckedModeBanner: false,
+      home: const TodoPage(),
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: createMaterialColor(const Color.fromRGBO(253, 7, 7, 1)),
       ),
-      home: const MyHomePage(title: 'ToDo List'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final List<String> _todoItems = ["springa", "laga mat", "tvätta"];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: _buildTodoList(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddTodoPage()),
-          );
-        },
-        tooltip: 'Add Item',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  Widget _buildTodoList() {
-    return ListView.builder(
-      itemCount: _todoItems.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(_todoItems[index]),
-        );
-      },
-    );
-  }
-}
+// Lägg till MyHomePage klassen här om den behövs
