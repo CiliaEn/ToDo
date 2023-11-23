@@ -1,6 +1,6 @@
 # todoapp
 
-An app for adding tasks to a todo-list.
+A new Flutter project.
 
 ## Getting Started
 
