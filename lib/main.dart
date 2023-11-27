@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'pages/todo_page.dart';
 import 'util/create_material_color.dart'; // Importera util.dart-filen
 import 'package:timezone/data/latest.dart' as tz;
+import 'pages/date_scroller.dart';
+
 
 void main() {
   tz.initializeTimeZones(); // Initialisera tidszoner
