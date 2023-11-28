@@ -26,15 +26,20 @@ class MyButton extends StatelessWidget {
 
     return MaterialButton(
       onPressed: onPressed, // Funktionen som körs när knappen trycks
-      color: buttonColor ?? defaultButtonColor, // Knappens bakgrundsfärg (standard: primärfärgen i temat)
+      color: buttonColor ??
+          defaultButtonColor, // Knappens bakgrundsfärg (standard: primärfärgen i temat)
       minWidth: width, // Knappens bredd (kan vara null för automatisk storlek)
       height: height, // Knappens höjd (kan vara null för automatisk storlek)
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8), // Anpassad form för knappen (rundade hörn)
+        borderRadius: BorderRadius.circular(
+            8), // Anpassad form för knappen (rundade hörn)
       ),
       child: Text(
         text, // Text som visas på knappen
-        style: textStyle ?? const TextStyle(color: Colors.white), // Textstil för knappens text (standard: vit text)
+        style: textStyle ??
+            const TextStyle(
+                color: Colors
+                    .white), // Textstil för knappens text (standard: vit text)
       ),
     );
   }

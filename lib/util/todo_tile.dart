@@ -9,7 +9,6 @@ import 'dart:io';
 
 //import 'package:shared_preferences/shared_preferences.dart';
 
-
 // Detta är huvudsakligen en View-komponent som representerar användargränssnittet för att visa och interagera med uppgifter
 class TodoApp extends StatefulWidget {
   final int taskId;
@@ -17,17 +16,17 @@ class TodoApp extends StatefulWidget {
   final bool taskCompleted;
   final Function(bool?)? onChanged;
   final void Function(BuildContext)? deleteFunction;
-   final void Function()? pickImage; // Lägg till pickImage som ett fält
+  final void Function()? pickImage; // Lägg till pickImage som ett fält
 
   const TodoApp({
-  Key? key,
-  required this.taskId,
-  required this.taskName,
-  required this.taskCompleted,
-  this.onChanged,
-  this.deleteFunction,
-  required this.pickImage, // Lägg till pickImage här
-}) : super(key: key);
+    Key? key,
+    required this.taskId,
+    required this.taskName,
+    required this.taskCompleted,
+    this.onChanged,
+    this.deleteFunction,
+    required this.pickImage, // Lägg till pickImage här
+  }) : super(key: key);
 
   @override
   _TodoAppState createState() => _TodoAppState();
@@ -48,52 +47,52 @@ class _TodoAppState extends State<TodoApp> {
     return tz.TZDateTime.from(nowUTC, parisTimeZone);
   }
 
- // I TodoApp-klassens State
- Future<void> pickImage() async {
-  final ImagePicker picker = ImagePicker();
-  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  // I TodoApp-klassens State
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-  if (image != null) {
-    final Directory appDir = await getApplicationDocumentsDirectory();
-    final String newPath = '${appDir.path}/${DateTime.now().toIso8601String()}_${image.name}';
-    final File newImage = await File(image.path).copy(newPath);
+    if (image != null) {
+      final Directory appDir = await getApplicationDocumentsDirectory();
+      final String newPath =
+          '${appDir.path}/${DateTime.now().toIso8601String()}_${image.name}';
+      final File newImage = await File(image.path).copy(newPath);
 
-    // Spara den nya sökvägen i widgetens tillstånd
-    setState(() {
-      imagePath = newImage.path;
-    });
+      // Spara den nya sökvägen i widgetens tillstånd
+      setState(() {
+        imagePath = newImage.path;
+      });
 
-    // Uppdatera sökvägen i databasen
-    await ToDoDataBase().updateTaskImagePath(widget.taskId, newImage.path);
+      // Uppdatera sökvägen i databasen
+      await ToDoDataBase().updateTaskImagePath(widget.taskId, newImage.path);
+    }
   }
-}
 
-
-@override
-void initState() {
- super.initState();
-  isCompleted = widget.taskCompleted;
-  _loadImagePath();
-  print('initState: Image Path: $imagePath'); // Anropa _loadImagePath när appen startas
-}
-Future<void> _loadImagePath() async {
-  print('Före hämtning av bildsökväg');
-  String? savedImagePath = await ToDoDataBase().getTaskImagePath(widget.taskId);
-  print('Efter hämtning av bildsökväg: Saved Image Path: $savedImagePath');
-  if (savedImagePath != null) {
-    setState(() {
-      imagePath = savedImagePath;
-    });
-  } else {
-    // Om det inte finns någon sparad bildsökväg, sätt imagePath till null eller en tom sökväg
-    setState(() {
-      imagePath = null; // Visa ingen bild om ingen bild är sparad
-    });
+  @override
+  void initState() {
+    super.initState();
+    isCompleted = widget.taskCompleted;
+    _loadImagePath();
+    print(
+        'initState: Image Path: $imagePath'); // Anropa _loadImagePath när appen startas
   }
-}
 
-
-
+  Future<void> _loadImagePath() async {
+    print('Före hämtning av bildsökväg');
+    String? savedImagePath =
+        await ToDoDataBase().getTaskImagePath(widget.taskId);
+    print('Efter hämtning av bildsökväg: Saved Image Path: $savedImagePath');
+    if (savedImagePath != null) {
+      setState(() {
+        imagePath = savedImagePath;
+      });
+    } else {
+      // Om det inte finns någon sparad bildsökväg, sätt imagePath till null eller en tom sökväg
+      setState(() {
+        imagePath = null; // Visa ingen bild om ingen bild är sparad
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +139,8 @@ Future<void> _loadImagePath() async {
                   children: [
                     Theme(
                       data: ThemeData(
-                        unselectedWidgetColor: const Color.fromRGBO(253, 7, 7, 1),
+                        unselectedWidgetColor:
+                            const Color.fromRGBO(253, 7, 7, 1),
                       ),
                       child: Checkbox(
                         value: isCompleted,
@@ -173,24 +173,26 @@ Future<void> _loadImagePath() async {
                           ),
                           Text(
                             DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated),
-                            style: const TextStyle(fontSize: 12, color: Colors.grey),
+                            style: const TextStyle(
+                                fontSize: 12, color: Colors.grey),
                           ),
                         ],
                       ),
                     ),
-                IconButton(
-  icon: const Icon(Icons.camera_alt),
-  onPressed: () {
-    pickImage(); // Anropa pickImage när användaren vill ladda upp en bild
-  },
-),
-            ],
-          ),
-          if (imagePath != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Image.file(File(imagePath!)), // Visar den valda bilden
-            ),
+                    IconButton(
+                      icon: const Icon(Icons.camera_alt),
+                      onPressed: () {
+                        pickImage(); // Anropa pickImage när användaren vill ladda upp en bild
+                      },
+                    ),
+                  ],
+                ),
+                if (imagePath != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child:
+                        Image.file(File(imagePath!)), // Visar den valda bilden
+                  ),
               ],
             ),
           ),
