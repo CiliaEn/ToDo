@@ -21,6 +21,9 @@ class DialogBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final defaultBorderColor = theme.primaryColor;
+
     return AlertDialog(
       backgroundColor: const Color.fromRGBO(
           255, 255, 255, 1), // Bakgrundsfärg för dialogrutan
@@ -33,13 +36,14 @@ class DialogBox extends StatelessWidget {
             TextField(
               controller:
                   controller, // Använd den angivna kontrollern för textinmatningen
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: defaultBorderColor)),
                 hintText:
                     "Write a new task", // Platsförhållandestips i textinmatningsrutan
               ),
             ),
-
             // Knappar för att spara och avbryta
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -49,9 +53,7 @@ class DialogBox extends StatelessWidget {
                     text: "Save",
                     onPressed:
                         onSave), // Använd MyButton-widget för att skapa knappen
-
                 const SizedBox(width: 8), // En tom yta mellan knapparna
-
                 // Avbryt-knapp
                 MyButton(
                     text: "Cancel",

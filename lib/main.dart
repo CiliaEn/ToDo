@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const TodoPage(),
       theme: ThemeData(
+        primaryColor: createMaterialColor(const Color.fromRGBO(253, 7, 7, 1)),
         primarySwatch: createMaterialColor(const Color.fromRGBO(253, 7, 7, 1)),
       ),
     );
