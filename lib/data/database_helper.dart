@@ -4,7 +4,7 @@ import 'package:path/path.dart';
 class DatabaseHelper {
   // Namn och version av SQLite-databasen.
   static const _databaseName = "ToDoDatabase.db";
-  static const _databaseVersion = 2;  // Versionsnummer för schema-migration.
+  static const _databaseVersion = 2; // Versionsnummer för schema-migration.
 
   // Namn på tabellen som används i databasen.
   static const table = 'todo_table';
@@ -19,7 +19,7 @@ class DatabaseHelper {
   // Getter för databasen. Öppnar databasen om den inte redan är öppnad.
   Future<Database> get database async {
     if (_database != null) return _database!;
-    
+
     _database = await _initDatabase();
     return _database!;
   }
@@ -27,12 +27,12 @@ class DatabaseHelper {
   // Initierar och öppnar databasen, skapar den om den inte finns.
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
-    
+
     return await openDatabase(
       path,
       version: _databaseVersion,
       onCreate: _onCreate,
-      onUpgrade: _onUpgrade,  // Anropas för schema-migration vid behov.
+      onUpgrade: _onUpgrade, // Anropas för schema-migration vid behov.
     );
   }
 

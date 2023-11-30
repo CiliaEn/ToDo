@@ -4,9 +4,12 @@ import 'my_button.dart';
 // Detta är huvudsakligen en View-komponent som representerar användargränssnittet för att visa och interagera med uppgifter.
 // En anpassad dialogruta-widget för att lägga till nya uppgifter
 class DialogBox extends StatelessWidget {
-  final TextEditingController controller; // En kontroller för att hantera textinmatning
-  final VoidCallback onSave; // En funktion som körs när användaren klickar på "Spara" knappen
-  final VoidCallback onCancel; // En funktion som körs när användaren klickar på "Avbryt" knappen
+  final TextEditingController
+      controller; // En kontroller för att hantera textinmatning
+  final VoidCallback
+      onSave; // En funktion som körs när användaren klickar på "Spara" knappen
+  final VoidCallback
+      onCancel; // En funktion som körs när användaren klickar på "Avbryt" knappen
 
   // Konstruktor för DialogBox-widget
   const DialogBox({
@@ -18,8 +21,12 @@ class DialogBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final defaultBorderColor = theme.primaryColor;
+
     return AlertDialog(
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 1), // Bakgrundsfärg för dialogrutan
+      backgroundColor: const Color.fromRGBO(
+          255, 255, 255, 1), // Bakgrundsfärg för dialogrutan
       content: SizedBox(
         height: 120,
         child: Column(
@@ -27,24 +34,31 @@ class DialogBox extends StatelessWidget {
           children: [
             // Användarinput via en textinmatningsruta
             TextField(
-              controller: controller, // Använd den angivna kontrollern för textinmatningen
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Write a new task", // Platsförhållandestips i textinmatningsrutan
+              controller:
+                  controller, // Använd den angivna kontrollern för textinmatningen
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: defaultBorderColor)),
+                hintText:
+                    "Write a new task", // Platsförhållandestips i textinmatningsrutan
               ),
             ),
-
             // Knappar för att spara och avbryta
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 // Spara-knapp
-                MyButton(text: "Save", onPressed: onSave), // Använd MyButton-widget för att skapa knappen
-
+                MyButton(
+                    text: "Save",
+                    onPressed:
+                        onSave), // Använd MyButton-widget för att skapa knappen
                 const SizedBox(width: 8), // En tom yta mellan knapparna
-
                 // Avbryt-knapp
-                MyButton(text: "Cancel", onPressed: onCancel), // Använd MyButton-widget för att skapa knappen
+                MyButton(
+                    text: "Cancel",
+                    onPressed:
+                        onCancel), // Använd MyButton-widget för att skapa knappen
               ],
             ),
           ],

@@ -53,7 +53,8 @@ class _TodoPageState extends State<TodoPage> {
         return DialogBox(
           controller: _controller,
           onSave: saveNewTask, // Save a new task when the user clicks "Save"
-          onCancel: () => Navigator.of(context).pop(), // Cancel and close the dialog box
+          onCancel: () =>
+              Navigator.of(context).pop(), // Cancel and close the dialog box
         );
       },
     );
@@ -70,7 +71,8 @@ class _TodoPageState extends State<TodoPage> {
 
     if (image != null) {
       final Directory appDir = await getApplicationDocumentsDirectory();
-      final String newPath = '${appDir.path}/${DateTime.now().toIso8601String()}_${image.name}';
+      final String newPath =
+          '${appDir.path}/${DateTime.now().toIso8601String()}_${image.name}';
       final File newImage = await File(image.path).copy(newPath);
 
       // Update the image path in the database for the specific task
@@ -81,49 +83,50 @@ class _TodoPageState extends State<TodoPage> {
     }
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-    floatingActionButton: FloatingActionButton(
-      onPressed: createNewTask,
-      child: const Icon(Icons.add),
-    ),
-    body: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Use an Expanded widget to allow the CalendarSlideshow to take available space
-        Expanded(
-          child: CalendarSlideshow(),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: createNewTask,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
         ),
-        // Use Flexible with a higher flex value for the ListView to take more space
-        Flexible(
-          flex: 3, // Adjust this value based on your preference
-          child: ListView.builder(
-            itemCount: toDoList.length,
-            itemBuilder: (context, index) {
-              return TodoApp(
-                taskId: toDoList[index]['id'],
-                taskName: toDoList[index]['task'],
-                taskCompleted: toDoList[index]['completed'] == 1,
-                onChanged: (value) {
-                  checkBoxChanged(value, toDoList[index]['id']);
-                },
-                deleteFunction: (ctx) {
-                  deleteTask(toDoList[index]['id']);
-                },
-                pickImage: () {
-                  pickImage(toDoList[index]['id']);
-                },
-              );
-            },
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Use an Expanded widget to allow the CalendarSlideshow to take available space
+          const Expanded(
+            child: CalendarSlideshow(),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
-
-
+          // Use Flexible with a higher flex value for the ListView to take more space
+          Flexible(
+            flex: 3, // Adjust this value based on your preference
+            child: ListView.builder(
+              itemCount: toDoList.length,
+              itemBuilder: (context, index) {
+                return TodoApp(
+                  taskId: toDoList[index]['id'],
+                  taskName: toDoList[index]['task'],
+                  taskCompleted: toDoList[index]['completed'] == 1,
+                  onChanged: (value) {
+                    checkBoxChanged(value, toDoList[index]['id']);
+                  },
+                  deleteFunction: (ctx) {
+                    deleteTask(toDoList[index]['id']);
+                  },
+                  pickImage: () {
+                    pickImage(toDoList[index]['id']);
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
